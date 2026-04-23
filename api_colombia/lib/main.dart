@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+// 1. Importamos tus rutas y tu tema
 import 'routes/app_router.dart';
+import 'themes/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Cargamos las variables de entorno, ignoramos si falla para usar el fallback del ApiService
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
@@ -23,10 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Taller API Colombia',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: Colors.amber, // Un toque de los colores de Colombia
-        useMaterial3: true,
-      ),
+
+      theme: AppTheme.lightTheme,
+
       routerConfig: appRouter,
     );
   }
