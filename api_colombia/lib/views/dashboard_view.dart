@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../widgets/dashboard_card.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
 
-  // Usamos los nombres EXACTOS de la API
   final List<Map<String, dynamic>> endpoints = const [
     {'title': 'Presidentes', 'path': 'President', 'icon': Icons.person},
     {
@@ -34,22 +34,11 @@ class DashboardView extends StatelessWidget {
         itemCount: endpoints.length,
         itemBuilder: (context, index) {
           final item = endpoints[index];
-          return Card(
-            elevation: 4,
-            child: InkWell(
-              onTap: () => context.push('/list/${item['path']}'),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(item['icon'], size: 40, color: Colors.blue),
-                  const SizedBox(height: 10),
-                  Text(
-                    item['title'],
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+
+          return DashboardCard(
+            title: item['title'],
+            icon: item['icon'],
+            onTap: () => context.push('/list/${item['path']}'),
           );
         },
       ),
